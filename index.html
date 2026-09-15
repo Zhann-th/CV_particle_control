@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI 2.0 - Real-Time 3D Hand Gesture & Spatial Control Platform">
+    <title>Spatial Control Platform</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+
+    <header class="app-header glass-panel">
+        <nav class="nav-links">
+            <a href="#hero" class="nav-item active">Overview</a>
+            <a href="#workspace-pin" class="nav-item">Studio</a>
+        </nav>
+        <div class="header-actions"></div>
+    </header>
+
+    <div class="page-wrapper">
+        <section id="hero" class="hero-section">
+            <div class="hero-content glass-panel reveal">
+                <h1 class="hero-title reveal reveal-delay-1">
+                    Control Cosmos Particles With <span class="gradient-text">Your Hands</span>
+                </h1>
+                <p class="hero-subtitle reveal reveal-delay-2">
+                    Real-time AI webcam hand tracking powering 2,500 glowing plasma particles with dynamic Black Hole singularity physics, custom HSL color palettes, and hyper-velocity fist scatter.
+                </p>
+
+                <div class="hero-stats-grid reveal reveal-delay-4">
+                    <div class="stat-card">
+                        <span class="stat-val">2,500</span>
+                        <span class="stat-lbl">Glowing Particles</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">60 FPS</span>
+                        <span class="stat-lbl">Smooth Physics</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">Dual Hand</span>
+                        <span class="stat-lbl">MediaPipe AI</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-val">Singularity</span>
+                        <span class="stat-lbl">Black Hole Mode</span>
+                    </div>
+                </div>
+
+                <div class="info-cards-row reveal reveal-delay-4">
+                    <div class="info-chip">
+                        <i class="fa-solid fa-bolt"></i>
+                        <div class="info-chip-text">
+                            <strong>Sub-10ms Latency</strong>
+                            <span>Real-time MediaPipe AI pipeline</span>
+                        </div>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fa-solid fa-atom"></i>
+                        <div class="info-chip-text">
+                            <strong>Singularity Vortex</strong>
+                            <span>Dynamic orbital physics simulation</span>
+                        </div>
+                    </div>
+                    <div class="info-chip">
+                        <i class="fa-solid fa-hand"></i>
+                        <div class="info-chip-text">
+                            <strong>21 Joint Tracking</strong>
+                            <span>Dual hand spatial 3D coordinates</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-down-hint">
+                <span>Scroll to Interactive Studio</span>
+                <i class="fa-solid fa-chevron-down bounce"></i>
+            </div>
+        </section>
+
+        <div id="workspace-pin" class="workspace-wrapper">
+            <section id="workspace" class="workspace-section">
+                <div class="workspace-container glass-panel reveal">
+                    <div id="canvas-container" class="workspace-canvas"></div>
+
+                    <div class="compact-camera-box glass-panel">
+                        <div class="camera-header">
+                            <span><i class="fa-solid fa-eye"></i> Vision Feed</span>
+                            <span class="fps-counter" id="fps-display">FPS: --</span>
+                        </div>
+                        <div class="video-container">
+                            <video id="webcam-video" playsinline style="display:none;"></video>
+                            <canvas id="tracking-canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <aside class="floating-controls-panel">
+                        <div class="telemetry-card controls-card glass-panel compact-card">
+                            <button id="camera-toggle-btn" class="btn btn-primary btn-camera-panel">
+                                <i class="fa-solid fa-video"></i> Start Camera
+                            </button>
+
+                            <div class="control-group">
+                                <div class="color-picker-wrapper">
+                                    <input type="color" id="custom-color-picker" value="#94a3b8">
+                                    <span id="color-hex-val">#94A3B8</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="theme-buttons">
+                                    <button class="theme-btn active" data-theme="silver"><span class="color-dot silver"></span> Silver</button>
+                                    <button class="theme-btn" data-theme="nebula"><span class="color-dot purple"></span> Nebula</button>
+                                    <button class="theme-btn" data-theme="plasma"><span class="color-dot blue"></span> Plasma</button>
+                                </div>
+                            </div>
+
+                            <div class="coords-strip">
+                                <span class="coord-badge"><span class="axis axis-x">X</span> <span id="coord-x">0.50</span></span>
+                                <span class="coord-badge"><span class="axis axis-y">Y</span> <span id="coord-y">0.50</span></span>
+                                <span class="coord-badge"><span class="axis axis-z">Z</span> <span id="coord-z">-0.05</span></span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </div>
+
+        <footer class="app-footer glass-panel">
+            <div class="footer-container">
+                <div class="footer-brand-col">
+                    <div class="footer-status-pill">
+                        <span class="status-dot-active"></span> Engine Online
+                    </div>
+                    <p class="footer-desc">Real-time 2D particle physics powered by MediaPipe AI & WebGL.</p>
+                </div>
+
+                <div class="footer-meta-col">
+                    <div class="meta-tags">
+                        <span><i class="fa-solid fa-microchip"></i> MediaPipe 2.0</span>
+                        <span><i class="fa-solid fa-cubes"></i> Three.js / Canvas2D</span>
+                        <span><i class="fa-solid fa-gauge-high"></i> 60 FPS Engine</span>
+                    </div>
+                </div>
+
+                <div class="footer-contacts-col">
+                    <span class="footer-col-title">Get In Touch</span>
+                    <div class="contact-links">
+                        <a href="mailto:thzhanasyl@gmail.com" class="contact-item"><i class="fa-solid fa-envelope"></i> thzhanasyl@gmail.com</a>
+                        <div class="footer-social-icons">
+                            <a href="https://github.com/Zhann-th" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/zhanassyl-syrlibayev-833250435/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://x.com/zhann_sy" target="_blank" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-bar">
+                <p>&copy; 2026 NeuroVision. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
