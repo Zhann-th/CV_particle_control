@@ -1,4 +1,4 @@
-// App state
+
 const state = {
     cameraActive: false,
     theme: 'nebula',
@@ -11,7 +11,7 @@ const state = {
     simAngle: 0
 };
 
-// Finger core coordinates
+
 let activeFingerCores = [
     { x: window.innerWidth * 0.42, y: window.innerHeight * 0.5 },
     { x: window.innerWidth * 0.58, y: window.innerHeight * 0.5 }
@@ -22,7 +22,7 @@ let targetFingerCores = [
     { x: window.innerWidth * 0.58, y: window.innerHeight * 0.5 }
 ];
 
-// DOM elements
+
 const webcamVideo = document.getElementById('webcam-video');
 const trackingCanvas = document.getElementById('tracking-canvas');
 const ctx = trackingCanvas.getContext('2d');
@@ -44,7 +44,7 @@ const colorHexVal = document.getElementById('color-hex-val');
 const themeButtons = document.querySelectorAll('.theme-btn');
 const simNotice = document.getElementById('sim-notice');
 
-// Glow sprites cache
+
 let activeGlowSprites = [];
 
 function hexToHSL(hex) {
@@ -108,7 +108,7 @@ function initGlowSprites() {
     updateCustomColor('#94a3b8');
 }
 
-// Stillness tracking
+
 let handStillnessFactor = 0.0;
 let prevPrimaryCorePos = { x: 0, y: 0 };
 
@@ -128,7 +128,7 @@ function updateStillnessTracking() {
     }
 }
 
-// Shockwave system
+
 let prevHandDetectedState = true;
 let shockwaves = [];
 let lastHandCenterPos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
@@ -145,7 +145,7 @@ function triggerHandState(detected) {
     state.handDetected = detected;
 }
 
-// Particle physics
+
 let mainCanvas, mainCtx;
 let particles = [];
 let clickParticles = [];
@@ -604,7 +604,7 @@ function drawBlackHoleSingularity(ctx, cx, cy, colorHex) {
     ctx.restore();
 }
 
-// Render loop
+
 let lastTime = performance.now();
 let frameCount = 0;
 
@@ -724,7 +724,7 @@ function animate() {
     mainCtx.restore();
 }
 
-// Simulation mode
+
 function updateSimulation() {
     state.simAngle += 0.02;
     state.handDetected = true;
@@ -839,7 +839,7 @@ trackingCanvas.addEventListener('click', () => {
     updateTelemetry(state.handPos.x, state.handPos.y, 0.0, getGestureModeName(currentDemoFingerCount), 0.995);
 });
 
-// Telemetry
+
 function updateTelemetry(x, y, z, gestureText, confidence) {
     state.handPos.x = x;
     state.handPos.y = y;
@@ -860,7 +860,7 @@ function updateTelemetry(x, y, z, gestureText, confidence) {
     if (gestureNameEl) gestureNameEl.innerHTML = `<i class="fa-solid fa-hands"></i> ${gestureText || countText}`;
 }
 
-// MediaPipe tracking
+
 let hands;
 let missedHandFrames = 0;
 
@@ -1038,7 +1038,7 @@ function drawLandmarksOnCanvas(landmarks, w, h, activeTipIds = [8, 12, 16, 20, 4
     });
 }
 
-// UI controls
+
 cameraToggleBtn.addEventListener('click', async () => {
     if (!state.cameraActive) {
         try {
@@ -1099,7 +1099,7 @@ cameraToggleBtn.addEventListener('click', async () => {
     }
 });
 
-// Audio synth
+
 let audioCtx, osc, gainNode, filterNode;
 
 function initAudioSynth() {
@@ -1159,7 +1159,7 @@ function toggleAudioSynth() {
     }
 }
 
-// Export snapshot
+
 function exportCanvasSnapshot() {
     const exportCanvas = document.createElement('canvas');
     exportCanvas.width = window.innerWidth;
@@ -1222,7 +1222,7 @@ if (heroCameraTrigger) {
     });
 }
 
-// Scroll reveal
+
 function initScrollReveal() {
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
